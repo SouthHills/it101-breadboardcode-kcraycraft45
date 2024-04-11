@@ -20,7 +20,7 @@ def destroy():
     global LED
     # Release resources
     LED.close()
-    LED_2.close()
+    LED_2.close()#changed
 
 if __name__ == "__main__":    # Program start point
     print("Program is starting ... \n")
