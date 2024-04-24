@@ -23,7 +23,7 @@ def toggleFirefox():
         firefox_pid.terminate()
     
 def toggleChrome():
-    global BUTTON, BUTTON_DOS
+    global BUTTON, BUTTON_DOS, chrome_pid
     l = [p.info for p in psutil.process_iter(attrs=['pid', 'name']) if 'chromium-browser' in p.info['name']]
     if(len(l) == 0):
         print("Chrome is not running\nOpening now.")
