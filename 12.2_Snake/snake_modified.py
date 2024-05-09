@@ -46,15 +46,15 @@ def do_keypress_event(current_direction):
     global PAUSED
     # TODO: Replace "False" with the correct method call to the joystick object you make
     # Can't double-back on your snake
-    if Joystick.get_direction(JOYSTICK) == "Left" and current_direction != "RIGHT":
+    if JOYSTICK.get_direction() == "Left" and current_direction != "RIGHT":
         return "LEFT"
-    elif Joystick.get_direction(JOYSTICK) == "Right" and current_direction != "LEFT":
+    elif JOYSTICK.get_direction() == "Right" and current_direction != "LEFT":
         return "RIGHT"
-    elif Joystick.get_direction(JOYSTICK) == "Up" and current_direction != "DOWN":
+    elif JOYSTICK.get_direction() == "Up" and current_direction != "DOWN":
         return "UP"
-    elif Joystick.get_direction(JOYSTICK) == "Down" and current_direction != "UP":
+    elif JOYSTICK.get_direction() == "Down" and current_direction != "UP":
         return "DOWN"
-    elif Joystick.get_button_pressed(JOYSTICK) == True: # Pressing in on the joystick should pause the game
+    elif JOYSTICK.get_button_pressed() == True: # Pressing in on the joystick should pause the game
         PAUSED = True
 
 
@@ -99,7 +99,7 @@ def game_loop():
                             quit() # Kill program
                 
                 #Replace "False" with a call to the appropriate method in your joystick instance
-                if Joystick.get_button_pressed(JOYSTICK) == True:
+                if JOYSTICK.get_button_pressed() == True:
                     PAUSED = False
 
             # Input handling
@@ -165,15 +165,15 @@ def game_loop():
                         game_over = True
             
             #Replace "False" with a call to the appropriate method in your joystick instance
-                counter = 0
-                for i in range (0, 10):#longpress
-                    if JOYSTICK.get_button_pressed():
-                        counter += 1
-                    else:
-                        break
-                if counter < 10:
-                    game_close = True
-                    game_over = True
+                #counter = 0  I don't know if this works.   Nothing is right
+                #for i in range (0, 10):#longpress
+                    #if JOYSTICK.get_button_pressed():
+                    #    counter += 1
+                    #else:
+                     #   break
+                #if counter < 10:
+                   # game_close = True
+                    #game_over = True
                 
                     
                     
