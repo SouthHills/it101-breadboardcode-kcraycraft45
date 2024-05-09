@@ -3,6 +3,9 @@
 import pygame
 import time
 import random
+from joystick import Joystick 
+
+joystick = Joystick()
 
 pygame.init()
 
@@ -35,26 +38,26 @@ def draw_snake(snake_list):
 
 # Function to display message
 def message(msg, color):
-    mesg = FONT.render(msg, True, color)
+    mesg = FONT.render(msg, True, color) 
     WINDOW.blit(mesg, [WIDTH / 6, HEIGHT / 3])
 
 # Function to generate random food position
 def generate_food():
     return random.randrange(GRID_WIDTH), random.randrange(GRID_HEIGHT)
 
-def do_keypress_event(event, current_direction):
+def do_keypress_event(current_direction):
     global PAUSED
-    # Can't double-back on your snake
-    if event.key == pygame.K_LEFT and current_direction != "RIGHT":
+    #Can't double-back on your snake
+    if joystick.get_direction() == "Left" and current_direction != "RIGHT":
         return "LEFT"
-    elif event.key == pygame.K_RIGHT and current_direction != "LEFT":
+    elif joystick.get_direction() == "Right" and current_direction != "LEFT":
         return "RIGHT"
-    elif event.key == pygame.K_UP and current_direction != "DOWN":
+    elif joystick.get_direction() == "Up" and current_direction != "DOWN":
         return "UP"
-    elif event.key == pygame.K_DOWN and current_direction != "UP":
+    elif joystick.get_direction() == "Down" and current_direction != "UP":
         return "DOWN"
-    elif event.key == pygame.K_ESCAPE: # Escape pauses the game
-        PAUSED = True
+    #elif event.key == pygame.K_ESCAPE: # Escape pauses the game
+        #PAUSED = True
 
 # Function to main loop
 def game_loop():
@@ -103,9 +106,9 @@ def game_loop():
                 if event.type == pygame.QUIT: # An attempt to close the window or program
                     pygame.quit()
                     quit()
-                if event.type == pygame.KEYDOWN:
-                    new_direction = do_keypress_event(event, direction) 
-                    direction = new_direction if new_direction != None else direction
+                
+            new_direction = do_keypress_event(direction)
+            direction = new_direction if new_direction != None else direction
 
             # Move the snake
             x, y = snake_list[0]
