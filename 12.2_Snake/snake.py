@@ -48,9 +48,9 @@ def generate_food():
 def do_keypress_event(current_direction):
     global PAUSED
     #Can't double-back on your snake
-    if joystick.get_direction() == "Left" and current_direction != "RIGHT":
+    if joystick.get_direction() == "Left" and current_direction != "Right":
         return "LEFT"
-    elif joystick.get_direction() == "Right" and current_direction != "LEFT":
+    elif joystick.get_direction() == "Right" and current_direction != "Left":
         return "RIGHT"
     elif joystick.get_direction() == "Up" and current_direction != "DOWN":
         return "UP"

@@ -1,7 +1,9 @@
 # NOTE: If running the game gives you an error, run either "sudo apt install python3-pygame" OR "pip install pygame" in the terminal.
 import pygame
 import random
-
+from joystick import Joystick
+from time import sleep
+JOYSTICK = Joystick()
 pygame.init()
 
 # Set up the display
@@ -44,16 +46,17 @@ def do_keypress_event(current_direction):
     global PAUSED
     # TODO: Replace "False" with the correct method call to the joystick object you make
     # Can't double-back on your snake
-    if False and current_direction != "RIGHT":
+    if Joystick.get_direction(JOYSTICK) == "Left" and current_direction != "RIGHT":
         return "LEFT"
-    elif False and current_direction != "LEFT":
+    elif Joystick.get_direction(JOYSTICK) == "Right" and current_direction != "LEFT":
         return "RIGHT"
-    elif False and current_direction != "DOWN":
+    elif Joystick.get_direction(JOYSTICK) == "Up" and current_direction != "DOWN":
         return "UP"
-    elif False and current_direction != "UP":
+    elif Joystick.get_direction(JOYSTICK) == "Down" and current_direction != "UP":
         return "DOWN"
-    elif False: # Pressing in on the joystick should pause the game
+    elif Joystick.get_button_pressed(JOYSTICK) == True: # Pressing in on the joystick should pause the game
         PAUSED = True
+
 
 # Function to main loop
 def game_loop():
@@ -95,8 +98,8 @@ def game_loop():
                             pygame.quit() # Kill game
                             quit() # Kill program
                 
-                # TODO: Replace "False" with a call to the appropriate method in your joystick instance
-                if False:
+                #Replace "False" with a call to the appropriate method in your joystick instance
+                if Joystick.get_button_pressed(JOYSTICK) == True:
                     PAUSED = False
 
             # Input handling
@@ -161,10 +164,20 @@ def game_loop():
                         game_close = False
                         game_over = True
             
-            # TODO: Replace "False" with a call to the appropriate method in your joystick instance
-            if False:
-                game_close = False
-                game_over = False
+            #Replace "False" with a call to the appropriate method in your joystick instance
+                counter = 0
+                for i in range (0, 10):#longpress
+                    if JOYSTICK.get_button_pressed():
+                        counter += 1
+                    else:
+                        break
+                if counter < 10:
+                    game_close = True
+                    game_over = True
+                
+                    
+                    
+            
 
         if game_over:
             pygame.quit() # Kill game
