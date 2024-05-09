@@ -54,7 +54,8 @@ def do_keypress_event(current_direction):
         return "UP"
     elif JOYSTICK.get_direction() == "Down" and current_direction != "UP":
         return "DOWN"
-    elif JOYSTICK.get_button_pressed() == True: # Pressing in on the joystick should pause the game
+        
+    if JOYSTICK.get_button_pressed() == True: # Pressing in on the joystick should pause the game
         PAUSED = True
 
 
