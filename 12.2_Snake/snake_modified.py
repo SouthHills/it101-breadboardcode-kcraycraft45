@@ -43,8 +43,8 @@ def generate_food():
     return random.randrange(GRID_WIDTH), random.randrange(GRID_HEIGHT)
 
 def do_keypress_event(current_direction):
-    global PAUSED
-    # TODO: Replace "False" with the correct method call to the joystick object you make
+    global PAUSED, JOYSTICK
+    # Replace "False" with the correct method call to the joystick object you make
     # Can't double-back on your snake
     if JOYSTICK.get_direction() == "Left" and current_direction != "RIGHT":
         return "LEFT"
@@ -60,7 +60,7 @@ def do_keypress_event(current_direction):
 
 # Function to main loop
 def game_loop():
-    global PAUSED
+    global PAUSED, JOYSTICK
     game_over = False
     game_close = False
 
@@ -99,7 +99,7 @@ def game_loop():
                             quit() # Kill program
                 
                 #Replace "False" with a call to the appropriate method in your joystick instance
-                if JOYSTICK.get_button_pressed() == True:
+                if JOYSTICK.get_button_pressed():
                     PAUSED = False
 
             # Input handling
@@ -174,7 +174,9 @@ def game_loop():
                 #if counter < 10:
                    # game_close = True
                     #game_over = True
-                
+            if JOYSTICK.get_button_pressed():
+                game_close = False
+                game_over = False
                     
                     
             
