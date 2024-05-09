@@ -54,7 +54,8 @@ def do_keypress_event(current_direction):
         return "UP"
     elif JOYSTICK.get_direction() == "Down" and current_direction != "UP":
         return "DOWN"
-    elif JOYSTICK.get_button_pressed() == True: # Pressing in on the joystick should pause the game
+        
+    if JOYSTICK.get_button_pressed() == True: # Pressing in on the joystick should pause the game
         PAUSED = True
 
 
@@ -164,21 +165,10 @@ def game_loop():
                         game_close = False
                         game_over = True
             
-            #Replace "False" with a call to the appropriate method in your joystick instance
-                #counter = 0  I don't know if this works.   Nothing is right
-                #for i in range (0, 10):#longpress
-                    #if JOYSTICK.get_button_pressed():
-                    #    counter += 1
-                    #else:
-                     #   break
-                #if counter < 10:
-                   # game_close = True
-                    #game_over = True
+            if JOYSTICK.get_button_pressed() == True:
+                game_close = False
+                game_over = False
                 
-                    
-                    
-            
-
         if game_over:
             pygame.quit() # Kill game
             quit() # Kill program
